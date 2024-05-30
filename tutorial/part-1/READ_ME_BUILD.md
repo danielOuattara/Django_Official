@@ -15,7 +15,7 @@ Django is installed and which version by running the following
 command in a shell prompt:
 
 ```sh
-    python -m django --version
+    python3 -m django --version
     # or
     django-admin --version
 ```
@@ -197,7 +197,7 @@ If you want to change the server’s port, pass it as a command-line argument.
 For instance, this command starts the server on port 8080:
 
 ```bash
-python manage.py runserver 8080
+python3 manage.py runserver 8080
 ```
 
 If you want to change the server’s IP, pass it along with the port.
@@ -207,7 +207,7 @@ you are running Vagrant or want to show off your work on other computers
 on the network), use:
 
 ```bash
-python manage.py runserver 0.0.0.0:8000
+python3 manage.py runserver 0.0.0.0:8000
 ```
 
 Full docs for the development server can be found in the [runserver](https://docs.djangoproject.com/en/5.0/ref/django-admin/#django-admin-runserver)
@@ -228,7 +228,7 @@ so you’ll have to restart the server in these cases.
 
 ##  Creating the Polls app
 
-Now that your environment – a “project” – is set up, you’re set to
+Now that your environment – “project” – is set up, you’re set to
 start doing work.
 
 Each application you write in Django consists of a Python package
@@ -257,7 +257,7 @@ website.
 
 **Your apps can live anywhere on your [Python path](https://docs.python.org/3/tutorial/modules.html#tut-searchpath)**
 
-In this tutorial, we’ll create our `poll app` in the same directory
+In this tutorial, we’ll create our `poll` app in the same directory
 as your `manage.py` file so that it can be imported as its own top-level
 module, rather than a submodule of mysite.
 
@@ -316,11 +316,11 @@ polls/
         __init__.py
     models.py
     tests.py
-    urls.py
+    urls.py # <-- new !  
     views.py
 ```
 
-In the polls/urls.py file include the following code:
+In the `polls/urls.py` file include the following code:
 
 ```py
 # polls/urls.py¶
@@ -357,7 +357,7 @@ included URLconf for further processing.
 
   The idea behind `include()` is to make it easy to plug-and-play URLs.
 
-Since polls are in their own URLconf `(polls/urls.py)`, they can be
+Since `polls` are in their own URLconf `(polls/urls.py)`, they can be
 placed under “/polls/”, or under “/fun_polls/”, or under “/content/polls/”,
 or any other path root, and the app will still work.
 
@@ -367,10 +367,10 @@ When to use include() ?
 
 You should always use include() when you include other URL patterns. 
 
-admin.site.urls is the only exception to this.
+`admin.site.urls` is the only exception to this.
 ```
 
-You have now wired an `index` view into the URLconf.
+You have wired an `index` view into the URLconf now.
 
 Verify it’s working with the following command:
 
@@ -393,10 +393,19 @@ If you get an error page here, check that you’re going to
 - The `path()` function is passed four (04) arguments:
   - two required: `route` and `view`,
   - two optional: `kwargs`, and `name`.
+
+```py
+(function) def path(
+    route: str,
+    view: IncludedURLConf,
+    kwargs: dict[str, Any] = ...,
+    name: str = ...
+) -> URLResolver
+```
   
 At this point, it’s worth reviewing what these arguments are for.
 
-##  path() argument: route
+##  path() argument: `route`
 
 `route` is a string that contains a URL pattern. When processing
 a request, Django starts at the first pattern in `urlpatterns` and
@@ -408,25 +417,25 @@ Patterns don’t search GET and POST parameters, or the domain name.
 For example:
 
 - in a request to (<https://www.example.com/myapp/>), the URLconf will
-  look for myapp/.
+  look for `myapp/`.
 
 - in a request to <https://www.example.com/myapp/?page=3>, the URLconf
-  will also look for myapp/.
+  will also look for `myapp/`.
 
-##  path() argument: view
+##  path() argument: `view`
 
 When Django finds a matching pattern, it calls the specified view
 function with an HttpRequest object as the first argument and any
 “captured” values from the route as keyword arguments. We’ll give
 an example of this in a bit.
 
-##  path() argument: kwargs
+##  path() argument: `kwargs`
 
 Arbitrary keyword arguments can be passed in a dictionary to the
 target view. We are not going to use this feature of Django in the
 tutorial.
 
-##  path() argument: name
+##  path() argument: `name`
 
 Naming your URL lets you refer to it unambiguously from elsewhere
 in Django, especially from within templates.

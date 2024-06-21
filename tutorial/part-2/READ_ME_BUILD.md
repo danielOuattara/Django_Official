@@ -154,7 +154,8 @@ For the minimalists
 Like we said above, the default applications are included for the common case, 
 but not everybody needs them. 
 
-If you don’t need any or all of them, feel free to comment-out or delete the appropriate line(s) from `INSTALLED_APPS` before running migrate. 
+If you don’t need any or all of them, feel free to comment-out or delete the 
+appropriate line(s) from `INSTALLED_APPS` before running migrate. 
 
 The migrate command will only run migrations for apps in INSTALLED_APPS.
 ```
@@ -271,15 +272,20 @@ Django will use the machine-readable name author.
 
 Result in Django Admin
 ----------------------
-When you use the Django admin interface to add or edit a Book object, the form will show labels like this:
+When you use the Django admin interface to add or edit a Book object, 
+the form will show labels like this:
 
 Book Title (for the title field)
 Date of Publication (for the publication_date field)
-Author (for the author field, using the machine-readable name since no human-readable name is provided)
+Author (for the author field, using the machine-readable name since no 
+human-readable name is provided)
 
 Conclusion
 -----------
-Using a human-readable name makes your admin interface and forms more user-friendly and easier to understand. It's a good practice to provide these names, especially when the machine-readable names are not descriptive or clear to end-users.
+Using a human-readable name makes your admin interface and forms more 
+user-friendly and easier to understand. It's a good practice to provide 
+these names, especially when the machine-readable names are not 
+descriptive or clear to end-users.
 """
 ```
 
